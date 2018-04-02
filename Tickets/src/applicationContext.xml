@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd        
+      http://www.springframework.org/schema/aop         
+      http://www.springframework.org/schema/aop/spring-aop.xsd        
+      http://www.springframework.org/schema/context         
+      http://www.springframework.org/schema/context/spring-context.xsd        
+      http://www.springframework.org/schema/tx         
+      http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://localhost:3306/tickets?characterEncoding=UTF8"/>
+    <property name="username" value="root"/>
+    <property name="password" value="970513"/>
+</bean>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="cn.edu.nju.software.models" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.connection.autocommit">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="baseDao" class="cn.edu.nju.software.dao.impl.BaseDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="activityDao" class="cn.edu.nju.software.dao.impl.ActivityDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="bankDao" class="cn.edu.nju.software.dao.impl.BankDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="bookDao" class="cn.edu.nju.software.dao.impl.BookDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="couponDao" class="cn.edu.nju.software.dao.impl.CouponDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="cardOwnDao" class="cn.edu.nju.software.dao.impl.CardOwnDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="memberDao" class="cn.edu.nju.software.dao.impl.MemberDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="managerDao" class="cn.edu.nju.software.dao.impl.ManagerDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="orderDao" class="cn.edu.nju.software.dao.impl.OrderDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="planDao" class="cn.edu.nju.software.dao.impl.PlanDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="presaleDao" class="cn.edu.nju.software.dao.impl.PresaleDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="recordDao" class="cn.edu.nju.software.dao.impl.RecordDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="seatDao" class="cn.edu.nju.software.dao.impl.SeatDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="seatHavingDao" class="cn.edu.nju.software.dao.impl.SeatHavingDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="ticketDao" class="cn.edu.nju.software.dao.impl.TicketDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+        <property name="seatDao" ref="seatDao"/>
+    </bean>
+
+    <bean id="ticketOwnDao" class="cn.edu.nju.software.dao.impl.TicketOwnDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="venueDao" class="cn.edu.nju.software.dao.impl.VenueDaoImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="activityService" class="cn.edu.nju.software.service.impl.ActivityServiceImpl">
+        <property name="activityDao" ref="activityDao"/>
+        <property name="planDao" ref="planDao"/>
+        <property name="seatDao" ref="seatDao"/>
+        <property name="seatHavingDao" ref="seatHavingDao"/>
+        <property name="ticketDao" ref="ticketDao"/>
+    </bean>
+
+    <bean id="autoService" class="cn.edu.nju.software.service.impl.AutoServiceImpl">
+        <property name="orderDao" ref="orderDao"/>
+        <property name="ticketDao" ref="ticketDao"/>
+        <property name="activityDao" ref="activityDao"/>
+        <property name="memberDao" ref="memberDao"/>
+        <property name="bookDao" ref="bookDao"/>
+        <property name="recordDao" ref="recordDao"/>
+        <property name="bankDao" ref="bankDao"/>
+        <property name="ticketOwnDao" ref="ticketOwnDao"/>
+        <property name="seatDao" ref="seatDao"/>
+        <property name="presaleDao" ref="presaleDao"/>
+        <property name="seatHavingDao" ref="seatHavingDao"/>
+    </bean>
+
+    <bean id="bankService" class="cn.edu.nju.software.service.impl.BankServiceImpl">
+        <property name="bankDao" ref="bankDao"/>
+        <property name="cardOwnDao" ref="cardOwnDao"/>
+        <property name="couponDao" ref="couponDao"/>
+    </bean>
+
+    <bean id="recordService" class="cn.edu.nju.software.service.impl.RecordServiceImpl">
+        <property name="recordDao" ref="recordDao"/>
+    </bean>
+
+    <bean id="memberService" class="cn.edu.nju.software.service.impl.MemberServiceImpl">
+        <property name="memberDao" ref="memberDao"/>
+        <property name="orderDao" ref="orderDao"/>
+        <property name="ticketDao" ref="ticketDao"/>
+        <property name="ticketOwnDao" ref="ticketOwnDao"/>
+        <property name="seatDao" ref="seatDao"/>
+        <property name="presaleDao" ref="presaleDao"/>
+        <property name="bookDao" ref="bookDao"/>
+        <property name="recordDao" ref="recordDao"/>
+        <property name="managerDao" ref="managerDao"/>
+        <property name="couponDao" ref="couponDao"/>
+    </bean>
+
+    <bean id="ticketService" class="cn.edu.nju.software.service.impl.TicketServiceImpl">
+        <property name="ticketDao" ref="ticketDao"/>
+    </bean>
+
+    <bean id="venueService" class="cn.edu.nju.software.service.impl.VenueServiceImpl">
+        <property name="venueDao" ref="venueDao"/>
+        <property name="planDao" ref="planDao"/>
+        <property name="recordDao" ref="recordDao"/>
+    </bean>
+
+    <bean id="startAction" class="cn.edu.nju.software.action.StartAction">
+    </bean>
+
+    <bean id="verifyAction" class="cn.edu.nju.software.action.VerifyAction">
+        <property name="memberService" ref="memberService"/>
+    </bean>
+
+    <bean id="registerMemberAction" class="cn.edu.nju.software.action.RegisterMemberAction">
+        <property name="memberService" ref="memberService"/>
+    </bean>
+
+    <bean id="registerVenueAction" class="cn.edu.nju.software.action.RegisterVenueAction">
+        <property name="venueService" ref="venueService"/>
+    </bean>
+
+    <bean id="logInMemberAction" class="cn.edu.nju.software.action.LogInMemberAction">
+        <property name="memberService" ref="memberService"/>
+    </bean>
+
+    <bean id="exchangeCouponAction" class="cn.edu.nju.software.action.ExchangeCouponAction">
+        <property name="memberService" ref="memberService"/>
+    </bean>
+
+    <bean id="logInManagerAction" class="cn.edu.nju.software.action.LogInManagerAction">
+        <property name="memberService" ref="memberService"/>
+        <property name="venueService" ref="venueService"/>
+    </bean>
+
+    <bean id="logInVenueAction" class="cn.edu.nju.software.action.LogInVenueAction">
+        <property name="venueService" ref="venueService"/>
+        <property name="activityService" ref="activityService"/>
+    </bean>
+
+    <bean id="manageAccountAction" class="cn.edu.nju.software.action.ManageAccountAction">
+    </bean>
+
+    <bean id="updateMemberAction" class="cn.edu.nju.software.action.UpdateMemberAction">
+        <property name="memberService" ref="memberService"/>
+    </bean>
+
+    <bean id="showActivitiesAction" class="cn.edu.nju.software.action.ShowActivitiesAction">
+        <property name="activityService" ref="activityService"/>
+    </bean>
+
+    <bean id="cancelQualificationAction" class="cn.edu.nju.software.action.CancelQualificationAction">
+        <property name="memberService" ref="memberService"/>
+    </bean>
+
+    <bean id="checkInfoAction" class="cn.edu.nju.software.action.CheckInfoAction">
+        <property name="venueService" ref="venueService"/>
+    </bean>
+
+    <bean id="passVenueAction" class="cn.edu.nju.software.action.PassVenueAction">
+    </bean>
+
+    <bean id="updateVenueAction" class="cn.edu.nju.software.action.UpdateVenueAction">
+        <property name="venueService" ref="venueService"/>
+    </bean>
+
+    <bean id="manageVenueAction" class="cn.edu.nju.software.action.ManageVenueAction">
+    </bean>
+
+    <bean id="planActivitiesAction" class="cn.edu.nju.software.action.PlanActivitiesAction">
+    </bean>
+
+    <bean id="publishActivitiesAction" class="cn.edu.nju.software.action.PublishActivitiesAction">
+        <property name="activityService" ref="activityService"/>
+    </bean>
+
+    <bean id="getPlanByAidAction" class="cn.edu.nju.software.action.GetPlanByAidAction">
+        <property name="activityService" ref="activityService"/>
+        <property name="venueService" ref="venueService"/>
+        <property name="ticketService" ref="ticketService"/>
+    </bean>
+
+    <bean id="getActivitiesByTypeAction" class="cn.edu.nju.software.action.GetActivitiesByTypeAction">
+        <property name="activityService" ref="activityService"/>
+    </bean>
+
+    <bean id="bookTicketsAction" class="cn.edu.nju.software.action.BookTicketsAction">
+        <property name="bankService" ref="bankService"/>
+        <property name="activityService" ref="activityService"/>
+        <property name="venueService" ref="venueService"/>
+    </bean>
+
+    <bean id="bindCardAction" class="cn.edu.nju.software.action.BindCardAction">
+    </bean>
+
+    <bean id="submitOrderAction" class="cn.edu.nju.software.action.SubmitOrderAction">
+        <property name="memberService" ref="memberService"/>
+    </bean>
+
+    <bean id="submitOrder1Action" class="cn.edu.nju.software.action.SubmitOrder1Action">
+        <property name="memberService" ref="memberService"/>
+    </bean>
+
+    <bean id="confirmOrderAction" class="cn.edu.nju.software.action.ConfirmOrderAction">
+        <property name="memberService" ref="memberService"/>
+        <property name="bankService" ref="bankService"/>
+        <property name="recordService" ref="recordService"/>
+    </bean>
+
+    <bean id="checkOrdersAction" class="cn.edu.nju.software.action.CheckOrdersAction">
+        <property name="memberService" ref="memberService"/>
+        <property name="activityService" ref="activityService"/>
+    </bean>
+
+    <bean id="checkTicketsAction" class="cn.edu.nju.software.action.CheckTicketsAction">
+    </bean>
+
+    <bean id="checkTicketAction" class="cn.edu.nju.software.action.CheckTicketAction">
+        <property name="ticketService" ref="ticketService"/>
+    </bean>
+
+    <bean id="payAction" class="cn.edu.nju.software.action.PayAction">
+        <property name="bankService" ref="bankService"/>
+        <property name="memberService" ref="memberService"/>
+    </bean>
+
+    <bean id="quitAction" class="cn.edu.nju.software.action.QuitAction">
+        <property name="bankService" ref="bankService"/>
+        <property name="memberService" ref="memberService"/>
+        <property name="activityService" ref="activityService"/>
+        <property name="recordService" ref="recordService"/>
+    </bean>
+
+    <bean id="lockSeatAction" class="cn.edu.nju.software.action.LockSeatAction">
+        <property name="ticketService" ref="ticketService"/>
+    </bean>
+
+    <bean id="unlockSeatAction" class="cn.edu.nju.software.action.UnlockSeatAction">
+        <property name="ticketService" ref="ticketService"/>
+    </bean>
+
+    <bean id="onsellTicketsAction" class="cn.edu.nju.software.action.OnsellTicketsAction">
+        <property name="bankService" ref="bankService"/>
+        <property name="activityService" ref="activityService"/>
+        <property name="venueService" ref="venueService"/>
+        <property name="ticketService" ref="ticketService"/>
+    </bean>
+
+    <bean id="queryRecordAction" class="cn.edu.nju.software.action.QueryRecordAction">
+        <property name="memberService" ref="memberService"/>
+    </bean>
+
+    <bean id="venueRecordAction" class="cn.edu.nju.software.action.VenueRecordAction">
+        <property name="venueService" ref="venueService"/>
+    </bean>
+
+    <bean id="settleFinanceAction" class="cn.edu.nju.software.action.SettleFinanceAction">
+        <property name="activityService" ref="activityService"/>
+    </bean>
+
+    <bean id="settleAction" class="cn.edu.nju.software.action.SettleAction">
+        <property name="activityService" ref="activityService"/>
+        <property name="venueService" ref="venueService"/>
+        <property name="recordService" ref="recordService"/>
+        <property name="memberService" ref="memberService"/>
+    </bean>
+
+    <bean id="systemStatisticsAction" class="cn.edu.nju.software.action.SystemStatisticsAction">
+        <property name="venueService" ref="venueService"/>
+    </bean>
+
+    <bean id="memberStatisticsAction" class="cn.edu.nju.software.action.MemberStatisticsAction">
+        <property name="memberService" ref="memberService"/>
+    </bean>
+
+    <bean id="financeStatisticsAction" class="cn.edu.nju.software.action.FinanceStatisticsAction">
+        <property name="recordService" ref="recordService"/>
+    </bean>
+
+    <bean id="venueStatisticsAction" class="cn.edu.nju.software.action.VenueStatisticsAction">
+        <property name="activityService" ref="activityService"/>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+
+    <context:component-scan base-package="cn.edu.nju.software" />
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*Member" propagation="REQUIRED" />
+            <tx:method name="*" propagation="NOT_SUPPORTED" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="serviceOperation"
+                      expression="execution( * cn.edu.nju.software.service..*Service.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
+    </aop:config>
+</beans>

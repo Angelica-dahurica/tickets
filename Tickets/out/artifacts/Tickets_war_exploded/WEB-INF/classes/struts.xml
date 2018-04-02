@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+		"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="struts2" namespace="/" extends="struts-default">
+		<default-action-ref name="start"/>
+
+        <action name="start" class="startAction">
+			<result name="index">/index.jsp</result>
+		</action>
+
+		<action name="verify" class="verifyAction">
+            <result name="memberHasCancelled">/memberHasCancelled.jsp</result>
+            <result name="memberHasExist">/memberHasExist.jsp</result>
+            <result name="mailSent">/mailSent.jsp</result>
+		</action>
+
+		<action name="registerMember" class="registerMemberAction">
+            <result name="registerMemberSuccess">/registerMemberSuccess.jsp</result>
+            <result name="registerVenueSuccess">/registerVenueSuccess.jsp</result>
+			<result name="registerError">/registerError.jsp</result>
+		</action>
+
+		<action name="registerVenue" class="registerVenueAction">
+			<result name="registerMemberSuccess">/registerMemberSuccess.jsp</result>
+			<result name="registerVenueSuccess">/registerVenueSuccess.jsp</result>
+			<result name="registerError">/registerError.jsp</result>
+		</action>
+
+        <action name="logInMember" class="logInMemberAction">
+            <result name="logInError">/logInError.jsp</result>
+            <result name="memberPage">/memberPage.jsp</result>
+            <result name="memberHasCancelled">/memberHasCancelled.jsp</result>
+        </action>
+
+        <action name="logInManager" class="logInManagerAction">
+            <result name="logInError">/logInError.jsp</result>
+            <result name="managerPage">/managerPage.jsp</result>
+        </action>
+
+        <action name="logInVenue" class="logInVenueAction">
+            <result name="logInError">/logInError.jsp</result>
+            <result name="venuePage">/venuePage.jsp</result>
+            <result name="inChecking">/inChecking.jsp</result>
+        </action>
+
+        <action name="cancelQualification" class="cancelQualificationAction">
+        </action>
+
+        <action name="showActivities" class="showActivitiesAction">
+            <result name="showActivities">/showActivities.jsp</result>
+        </action>
+
+        <action name="checkInfo" class="checkInfoAction">
+            <result name="checkVenueInfo">/checkVenueInfo.jsp</result>
+        </action>
+
+        <action name="passVenue" class="passVenueAction">
+        </action>
+
+        <action name="manageVenue" class="manageVenueAction">
+            <result name="updatingVenue">/updatingVenue.jsp</result>
+            <result name="manageVenue">/manageVenue.jsp</result>
+        </action>
+
+        <action name="updateVenue" class="updateVenueAction">
+        </action>
+
+        <action name="manageAccount" class="manageAccountAction">
+            <result name="manageMember">/manageMember.jsp</result>
+        </action>
+
+        <action name="updateMember" class="updateMemberAction">
+        </action>
+
+        <action name="planActivities" class="planActivitiesAction">
+            <result name="planActivities">/planActivities.jsp</result>
+        </action>
+
+        <action name="publishActivities" class="publishActivitiesAction">
+        </action>
+
+        <action name="getPlanByAid" class="getPlanByAidAction">
+            <result name="showActivityPresale">/showActivityPresale.jsp</result>
+            <result name="showActivityOnselling">/showActivityOnselling.jsp</result>
+            <result name="showActivityPostsale">/showActivityPostsale.jsp</result>
+        </action>
+
+        <action name="getActivitiesByType" class="getActivitiesByTypeAction">
+            <result name="showActivities">/showActivities.jsp</result>
+        </action>
+
+        <action name="bookTickets" class="bookTicketsAction">
+            <result name="bindCard">/bindCard.jsp</result>
+            <result name="chooseCard">/chooseCard.jsp</result>
+        </action>
+
+        <action name="bindCard" class="bindCardAction">
+        </action>
+
+        <action name="submitOrder" class="submitOrderAction">
+            <result name="confirmOrder">/confirmOrder.jsp</result>
+        </action>
+
+        <action name="submitOrder1" class="submitOrder1Action">
+            <result name="confirmOrder">/confirmOrder.jsp</result>
+        </action>
+
+        <action name="confirmOrder" class="confirmOrderAction">
+            <result name="bookSuccess">/bookSuccess.jsp</result>
+            <result name="notEnoughMoney">/notEnoughMoney.jsp</result>
+        </action>
+
+        <action name="checkOrders" class="checkOrdersAction">
+            <result name="checkOrders">/checkOrders.jsp</result>
+        </action>
+
+        <action name="pay" class="payAction">
+            <result name="bindCard">/bindCard.jsp</result>
+            <result name="confirmOrder">/confirmOrder.jsp</result>
+        </action>
+
+        <action name="quit" class="quitAction">
+        </action>
+
+        <action name="lockSeat" class="lockSeatAction">
+        </action>
+
+        <action name="unlockSeat" class="unlockSeatAction">
+        </action>
+
+        <action name="onsellTickets" class="onsellTicketsAction">
+            <result name="notMoreThanSix">/notMoreThanSix.jsp</result>
+            <result name="bindCard">/bindCard.jsp</result>
+            <result name="chooseCard1">/chooseCard1.jsp</result>
+        </action>
+
+        <action name="queryRecord" class="queryRecordAction">
+            <result name="queryRecords">/queryRecords.jsp</result>
+        </action>
+
+        <action name="venueRecord" class="venueRecordAction">
+            <result name="queryRecords1">/queryRecords1.jsp</result>
+        </action>
+
+        <action name="venueStatistics" class="venueStatisticsAction">
+            <result name="venuePage">/venuePage.jsp</result>
+        </action>
+
+        <action name="settleFinance" class="settleFinanceAction">
+            <result name="settleFinance">/settleFinance.jsp</result>
+        </action>
+
+        <action name="settle" class="settleAction">
+        </action>
+
+        <action name="exchangeCoupon" class="exchangeCouponAction">
+        </action>
+
+        <action name="systemStatistics" class="systemStatisticsAction">
+            <result name="managerPage">/managerPage.jsp</result>
+        </action>
+
+        <action name="memberStatistics" class="memberStatisticsAction">
+            <result name="memberStatistics">/memberStatistics.jsp</result>
+        </action>
+
+        <action name="financeStatistics" class="financeStatisticsAction">
+            <result name="fianceStatistics">/financeStatistics.jsp</result>
+        </action>
+
+        <action name="checkTickets" class="checkTicketsAction">
+            <result name="checkTickets">/checkTickets.jsp</result>
+        </action>
+
+        <action name="checkTicket" class="checkTicketAction">
+            <result name="checkTicketError">/checkTicketError.jsp</result>
+            <result name="checkTicketSuccess">/checkTicketSuccess.jsp</result>
+        </action>
+
+	</package>
+</struts>
+

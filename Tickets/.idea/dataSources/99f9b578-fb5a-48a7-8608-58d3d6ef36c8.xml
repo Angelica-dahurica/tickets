@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="tickets@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="tickets">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="sys"/>
+    <table id="7" parent="2" name="activity"/>
+    <table id="8" parent="2" name="bank"/>
+    <table id="9" parent="2" name="book"/>
+    <table id="10" parent="2" name="coupon"/>
+    <table id="11" parent="2" name="has_seat"/>
+    <table id="12" parent="2" name="manager"/>
+    <table id="13" parent="2" name="member"/>
+    <table id="14" parent="2" name="order"/>
+    <table id="15" parent="2" name="own_card"/>
+    <table id="16" parent="2" name="own_ticket"/>
+    <table id="17" parent="2" name="plan"/>
+    <table id="18" parent="2" name="presale"/>
+    <table id="19" parent="2" name="record"/>
+    <table id="20" parent="2" name="seat"/>
+    <table id="21" parent="2" name="ticket"/>
+    <table id="22" parent="2" name="venue"/>
+    <column id="23" parent="7" name="activityid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="7" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="25" parent="7" name="time">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="26" parent="7" name="type">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="27" parent="7" name="description">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="28" parent="7" name="status">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="29" parent="7" name="PRIMARY">
+      <ColNames>activityid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="30" parent="8" name="accountid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="31" parent="8" name="paypassword">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="32" parent="8" name="balance">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <key id="33" parent="8" name="PRIMARY">
+      <ColNames>accountid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="34" parent="9" name="email">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="9" name="orderid">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="36" parent="9" name="orderid">
+      <ColNames>orderid</ColNames>
+    </index>
+    <key id="37" parent="9" name="PRIMARY">
+      <ColNames>email
+orderid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="38" parent="9" name="book_ibfk_1">
+      <ColNames>email</ColNames>
+      <RefSchemaName>tickets</RefSchemaName>
+      <RefTableName>member</RefTableName>
+      <RefColNames>email</RefColNames>
+    </foreign-key>
+    <foreign-key id="39" parent="9" name="book_ibfk_2">
+      <ColNames>orderid</ColNames>
+      <RefSchemaName>tickets</RefSchemaName>
+      <RefTableName>order</RefTableName>
+      <RefColNames>orderid</RefColNames>
+    </foreign-key>
+    <column id="40" parent="10" name="email">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="41" parent="10" name="price">
+      <Position>2</Position>
+      <DataType>double|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="42" parent="10" name="quantity">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="43" parent="10" name="PRIMARY">
+      <ColNames>email
+price
+quantity</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="44" parent="11" name="activityid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="11" name="seatid">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="46" parent="11" name="seatid">
+      <ColNames>seatid</ColNames>
+    </index>
+    <key id="47" parent="11" name="PRIMARY">
+      <ColNames>activityid
+seatid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="48" parent="11" name="has_seat_ibfk_1">
+      <ColNames>activityid</ColNames>
+      <RefSchemaName>tickets</RefSchemaName>
+      <RefTableName>activity</RefTableName>
+      <RefColNames>activityid</RefColNames>
+    </foreign-key>
+    <foreign-key id="49" parent="11" name="has_seat_ibfk_2">
+      <ColNames>seatid</ColNames>
+      <RefSchemaName>tickets</RefSchemaName>
+      <RefTableName>seat</RefTableName>
+      <RefColNames>seatid</RefColNames>
+    </foreign-key>
+    <column id="50" parent="12" name="name">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="12" name="password">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="52" parent="12" name="bala">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <key id="53" parent="12" name="PRIMARY">
+      <ColNames>name</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="54" parent="13" name="email">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="55" parent="13" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="56" parent="13" name="password">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="57" parent="13" name="sex">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="58" parent="13" name="age">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="59" parent="13" name="address">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="60" parent="13" name="consumption">
+      <Position>7</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="61" parent="13" name="score">
+      <Position>8</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="62" parent="13" name="level">
+      <Position>9</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="63" parent="13" name="active">
+      <Position>10</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="64" parent="13" name="PRIMARY">
+      <ColNames>email</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="65" parent="14" name="orderid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="66" parent="14" name="booktime">
+      <Position>2</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="67" parent="14" name="status">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="68" parent="14" name="PRIMARY">
+      <ColNames>orderid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="69" parent="15" name="email">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="70" parent="15" name="accountid">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="71" parent="15" name="accountid">
+      <ColNames>accountid</ColNames>
+    </index>
+    <key id="72" parent="15" name="PRIMARY">
+      <ColNames>email
+accountid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="73" parent="15" name="own_card_ibfk_1">
+      <ColNames>email</ColNames>
+      <RefSchemaName>tickets</RefSchemaName>
+      <RefTableName>member</RefTableName>
+      <RefColNames>email</RefColNames>
+    </foreign-key>
+    <foreign-key id="74" parent="15" name="own_card_ibfk_2">
+      <ColNames>accountid</ColNames>
+      <RefSchemaName>tickets</RefSchemaName>
+      <RefTableName>bank</RefTableName>
+      <RefColNames>accountid</RefColNames>
+    </foreign-key>
+    <column id="75" parent="16" name="orderid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="76" parent="16" name="ticketid">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="77" parent="16" name="ticketid">
+      <ColNames>ticketid</ColNames>
+    </index>
+    <key id="78" parent="16" name="PRIMARY">
+      <ColNames>orderid
+ticketid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="79" parent="16" name="own_ticket_ibfk_1">
+      <ColNames>orderid</ColNames>
+      <RefSchemaName>tickets</RefSchemaName>
+      <RefTableName>order</RefTableName>
+      <RefColNames>orderid</RefColNames>
+    </foreign-key>
+    <foreign-key id="80" parent="16" name="own_ticket_ibfk_2">
+      <ColNames>ticketid</ColNames>
+      <RefSchemaName>tickets</RefSchemaName>
+      <RefTableName>ticket</RefTableName>
+      <RefColNames>ticketid</RefColNames>
+    </foreign-key>
+    <column id="81" parent="17" name="venueid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="82" parent="17" name="activityid">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="83" parent="17" name="activityid">
+      <ColNames>activityid</ColNames>
+    </index>
+    <key id="84" parent="17" name="PRIMARY">
+      <ColNames>venueid
+activityid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="85" parent="17" name="plan_ibfk_1">
+      <ColNames>venueid</ColNames>
+      <RefSchemaName>tickets</RefSchemaName>
+      <RefTableName>venue</RefTableName>
+      <RefColNames>venueid</RefColNames>
+    </foreign-key>
+    <foreign-key id="86" parent="17" name="plan_ibfk_2">
+      <ColNames>activityid</ColNames>
+      <RefSchemaName>tickets</RefSchemaName>
+      <RefTableName>activity</RefTableName>
+      <RefColNames>activityid</RefColNames>
+    </foreign-key>
+    <column id="87" parent="18" name="email">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="88" parent="18" name="orderid">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="89" parent="18" name="activityid">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="90" parent="18" name="type">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="91" parent="18" name="quantity">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="92" parent="18" name="price">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="93" parent="18" name="PRIMARY">
+      <ColNames>orderid
+price</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="94" parent="19" name="activityid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="95" parent="19" name="activityname">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="96" parent="19" name="orderid">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="97" parent="19" name="price">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="98" parent="19" name="operate">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="99" parent="19" name="PRIMARY">
+      <ColNames>orderid
+price
+operate</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="100" parent="20" name="seatid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="101" parent="20" name="type">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="102" parent="20" name="price">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="103" parent="20" name="num">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="104" parent="20" name="PRIMARY">
+      <ColNames>seatid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="105" parent="21" name="ticketid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="106" parent="21" name="activityid">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="107" parent="21" name="seattype">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="108" parent="21" name="row">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="109" parent="21" name="col">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="110" parent="21" name="price">
+      <Position>6</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="111" parent="21" name="status">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="112" parent="21" name="locktime">
+      <Position>8</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="113" parent="21" name="lockperson">
+      <Position>9</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <index id="114" parent="21" name="activityid">
+      <ColNames>activityid</ColNames>
+    </index>
+    <key id="115" parent="21" name="PRIMARY">
+      <ColNames>ticketid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="116" parent="21" name="ticket_ibfk_1">
+      <ColNames>activityid</ColNames>
+      <RefSchemaName>tickets</RefSchemaName>
+      <RefTableName>activity</RefTableName>
+      <RefColNames>activityid</RefColNames>
+    </foreign-key>
+    <column id="117" parent="22" name="venueid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="118" parent="22" name="place">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="119" parent="22" name="description">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="120" parent="22" name="password">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="121" parent="22" name="seatnum">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="122" parent="22" name="status">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="123" parent="22" name="bala">
+      <Position>7</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <key id="124" parent="22" name="PRIMARY">
+      <ColNames>venueid</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
