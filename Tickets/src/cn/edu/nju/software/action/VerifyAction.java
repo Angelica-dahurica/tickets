@@ -59,11 +59,11 @@ public class VerifyAction extends BaseAction{
         Message msg = new MimeMessage(session);
         msg.setSubject("Tickets订票系统");
         msg.setText("这是一封由Tickets订票系统发送的邮件！您的验证码为" + (new BASE64Encoder()).encodeBuffer((email + "tickets").getBytes()));
-        msg.setFrom(new InternetAddress("m18805156300@163.com", "Tickets订票系统", "UTF-8"));
+        //msg.setFrom(new InternetAddress("发送的邮箱", "Tickets订票系统", "UTF-8"));
         msg.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(email, "", "UTF-8"));
 
         Transport transport = session.getTransport();
-        transport.connect("m18805156300", "Tx995472235.");
+        //transport.connect("发送的邮箱", "该邮箱的密码");
         transport.sendMessage(msg, msg.getAllRecipients());
         transport.close();
         return "mailSent";
